@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kommon.FM Radio</title>
+    <link href="css/style.css" rel="stylesheet">
+    <link rel="stylesheet"  href="css/skin.css" />
+    <link rel="stylesheet" href="css/tooltipster.css"/>
+    <link rel="stylesheet" href="css/jquery.jscrollpane.css"/>
+    <script src="./audiojs/audio.min.js"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tooltipster.min.js"></script>
+    <script type="text/javascript" src="js/functions.js"></script>
+	<script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/history.js"></script>
+</head>
+<body>
+   <div id="player-wrapper">
+       <div id="header-top" class="player-header">
+           <span class="status" id="onair">OFF AIR</span>
+           <h3 class="stream-title"><marquee id="stream-meta-title"></marquee></h3>
+       </div>
+       <div style="clear:both;"></div>
+       <div id="now-playing">
+           <div id="now-playing-inner">
+               <img src="images/artwork.png" alt="" id="now-playing-img" height="100px" width="100px"/>
+               <h3><span id="now-playing-text">Fetching Information...</span></h3>
+               <p><strong>Track:</strong> <span id="now-playing-track"></span><br/>
+                <strong>Artist:</strong> <span id="now-playing-artist"></span><br/>
+                <strong>Album:</strong> <span id="now-playing-album"></span> </p>
+           </div>
+       </div>
+       <div style="clear:both;"></div>
+       <div class="player-header">
+           <h3 class="stream-title recent-tracks">Recent Tracks</h3>
+           <div class="clients">
+                <a href="http://78.129.181.183:2199/tunein/kommon.asx" target="_blank"><img src="images/wmp.png"/></a>
+                <a href="http://78.129.181.183:2199/tunein/kommon.pls" target="_blank"><img src="images/winamp.png"/></a>
+                <a href="http://78.129.181.183:2199/tunein/kommon.qtl" target="_blank"><img src="images/quicktime.png"/></a>
+                <a href="http://78.129.181.183:2199/tunein/kommon.ram" target="_blank"><img src="images/realplayer.png"/></a>
+           </div>
+       </div>
+       <div id="recent-tracks-carousel">
+            <div id="recent-tracks" class="scroll-pane" ng-controller="HistoryController" ng-app>
+                   <div class="recent-track" ng-repeat="item in items">
+<img src="images/artwork.png" alt="" ng-hide="item.covers[2]" ng-show="!item.covers[2]"height="100px" width="100px"/>
+<img src="{{item.covers[2]}}" alt="" ng-hide="!item.covers[2]" ng-show="item.covers[2]" height="100px" width="100px"/>
+                       <p><strong>Track:</strong> {{item.track}} <br/>
+                        <strong>Artist:</strong> <a href="{{item.url}}" target="_blank"> {{item.artist}} </a><br/>
+                        <strong>Album:</strong> {{item.album}}<br/>
+                        <strong>Time:</strong> {{item.time | date: 'HH:mm:ss'}}
+                       </p>
+                       <div style="clear:both;"></div>
+                   </div>
+                <div style="clear:both;"></div>
+            </div>   <!--- END RECENT  TRACKS TAG-->
+           <div style="clear:both;"></div>
+       </div>
+       <div style="clear:both;"></div>
+       <div id="player">
+           <audio src="http://78.129.181.183:8000/stream" id="audio-player" autoplay="autoplay"></audio>
+       </div>
+   </div>
+</body>
+</html>

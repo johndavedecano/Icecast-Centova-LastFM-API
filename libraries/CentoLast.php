@@ -116,8 +116,8 @@ class CentoLast {
                 
                 if($track['@attributes']['status'] == 'ok'){
                     
-                    $tracks[$counter]['track'] = (isset($track['track']['name']))?$track['track']['name']:'';
-                    $tracks[$counter]['artist'] = (isset($track['track']['album']['artist']))?$track['track']['album']['artist']:'';
+                    $tracks[$counter]['track'] = (isset($track['track']['name']))?$track['track']['name']:$track_info[0];
+                    $tracks[$counter]['artist'] = (isset($track['track']['album']['artist']))?$track['track']['album']['artist']:$track_info[1];
                     $tracks[$counter]['time'] = $song->time;
                     $tracks[$counter]['duration'] = (isset($track['track']['duration']))?$track['track']['duration']:'';
                     $tracks[$counter]['covers'] = (isset($track['track']['album']['image']))?$track['track']['album']['image']:'';
